@@ -1,0 +1,15 @@
+[package]
+name = "slac-mcp"
+version = "1.1.0"
+edition = "2024"
+
+[dependencies]
+rmcp = { version = "2.2.0", features = ["transport-io"] }
+slac = "1.1.0"
+anyhow = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tokio = { version = "1.52.4", features = ["full"] }
+serde_json = "1.0.150"
+serde = "1.0.228"
+schemars = "1.2.1"
