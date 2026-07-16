@@ -17,6 +17,11 @@ cargo run
 
 The server communicates over stdio using the Model Context Protocol.
 
+### Output Format
+
+By default, `evaluate` returns the Rust `Display` representation of the result. 
+Set `OUTPUT_FORMAT=JSON` to get serialized JSON instead 
+
 ### With MCP Inspector
 
 ```sh

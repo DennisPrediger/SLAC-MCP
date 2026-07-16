@@ -31,7 +31,9 @@ Provide LLM agents a simple way to evaluate logical and arithmetic expressions a
 
 `slac::StaticEnvironment` is `!Send` + `!Sync` (contains `Rc` internally). It cannot be stored in the service struct behind `Arc<Mutex<>>`. Each `evaluate` call creates a fresh environment: `StaticEnvironment::default()` -> `extend_environment()` -> `compile()` -> `execute()`.
 
-`get_syntax` includes the full function reference via `include_str!`, so a separate function listing tool is not needed.
+### Environment Variables
+
+- `OUTPUT_FORMAT=JSON` - When set, `evaluate` returns pretty-printed JSON via `serde_json` instead of the default Rust `Display` representation.
 
 ## Build & Run
 

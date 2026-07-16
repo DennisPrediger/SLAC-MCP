@@ -1,3 +1,5 @@
+use std::env;
+
 use rmcp::{
     handler::server::wrapper::Parameters, model::*, tool, tool_router, ErrorData as McpError,
 };
@@ -66,21 +68,33 @@ variables), the tool returns an error message describing the problem.
         &self,
         Parameters(params): Parameters<EvaluateParams>,
     ) -> Result<CallToolResult, McpError> {
+        // 1. Compile the Expression into an AST
         let ast = compile(&params.expression)
             .map_err(|e| McpError::invalid_params(format!("compile error: {e}"), None))?;
 
+        // 2. add stdlib
         let mut env = StaticEnvironment::default();
         extend_environment(&mut env);
 
+        // 3. check for errors
         check_variables_and_functions(&env, &ast)
             .map_err(|e| McpError::invalid_params(format!("validation error: {e}"), None))?;
 
+        // 4. interpret the AST
         let result = execute(&env, &ast)
             .map_err(|e| McpError::invalid_params(format!("execution error: {e}"), None))?;
 
-        Ok(CallToolResult::success(vec![ContentBlock::text(
-            result.to_string(),
-        )]))
+        // 5. serialize into the output format
+        let as_json = env::var("OUTPUT_FORMAT").map_or(false, |s| s.eq_ignore_ascii_case("JSON"));
+        
+        let output = if as_json {
+            serde_json::to_string_pretty(&result)
+                .map_err(|e| McpError::invalid_params(format!("serialisation error: {e}"), None))?
+        } else {
+            result.to_string() // as Rust Repr
+        };
+
+        Ok(CallToolResult::success(vec![ContentBlock::text(output)]))
     }
 
     #[tool(
