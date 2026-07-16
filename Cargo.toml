@@ -1,7 +1,12 @@
 [package]
 name = "slac-mcp"
 version = "1.1.0"
+authors = ["Dennis Prediger <dennis.prediger@gmail.com>"]
 edition = "2024"
+description = "MCP server exposing SLAC (Simple Logic & Arithmetic Compiler) as tools for LLM agents"
+license = "Apache-2.0"
+repository = "https://github.com/DennisPrediger/slac-mcp"
+readme = "README.md"
 
 [dependencies]
 rmcp = { version = "2.2.0", features = ["transport-io"] }
