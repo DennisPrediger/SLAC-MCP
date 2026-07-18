@@ -1,0 +1,21 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.DennisPrediger/slac-mcp",
+  "description": "MCP server exposing SLAC (Simple Logic \u0026 Arithmetic Compiler) as tools for LLM agents",
+  "repository": {
+    "url": "https://github.com/DennisPrediger/SLAC-MCP",
+    "source": "github",
+    "subfolder": "npm/slac-mcp"
+  },
+  "version": "1.1.1",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "slac-mcp",
+      "version": "1.1.1",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
