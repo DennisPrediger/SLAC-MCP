@@ -1,6 +1,6 @@
 {
   "name": "slac-mcp",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "MCP server exposing SLAC (Simple Logic & Arithmetic Compiler) as tools for LLM agents",
   "license": "Apache-2.0",
   "author": "Dennis Prediger <dennis.prediger@gmail.com>",
